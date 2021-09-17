@@ -1,0 +1,100 @@
+#include<stdio.h>
+#include<string.h>
+void main()
+{
+char a[50],b[50];
+int i=0,j=8,k,count,n;
+printf("Enter Input fram (0's & 1's only):\n");
+gets(a);
+n=strlen(a);
+strcpy(b,"01111110");
+while(i<n)
+{
+count=1;
+if(a[i]='1')
+{
+b[j]=a[i];
+for(k=i+1;a[k]=='1' && k<n && count<5;k++)
+{
+j++;
+b[j]=a[k];
+count++;
+if(count==5)
+{
+j++;
+b[j]='/0';
+}
+i=k;
+}
+}
+else
+{
+b[j]=a[i];
+}
+i++;
+j++;
+}
+b[j]='\0';
+strcat(b,"01111110");
+printf("After stuffing the frame is:\n");
+puts(b);
+}
+
+
+  //b
+  #include<stdio.h>
+#include<string.h>
+void main(){
+char c[100],d[100];
+int i,j,n;
+printf("\nEnter the input frame:\n");
+gets(c);
+n=strlen(c);
+d[0]='s';
+d[1]='t';
+d[2]='x';
+for(i=0,j=3;i<n;i++,j++)
+{
+if((c[i]=='d' && c[i+1]=='1' &&c[i+2]=='e'))
+{
+d[j]='d';
+j++;
+d[j]='1';
+j++;
+n=n+3;
+}
+else if((c[i]=='s' && c[i+1]=='t' && c[i+2]=='X'))
+{
+d[j]='s';
+j++;
+d[j]='t';
+j++;
+d[j]='x';
+j++;
+n=n+3;
+}
+else if((c[i]=='e' && c[i+1]=='t' && c[i+2]=='x'))
+{
+d[j]='e';
+j++;
+d[j]='t';
+
+j++;
+d[j]='x';
+j++;
+n=n+3;
+}
+d[j]=c[i];
+}
+n=n+2;
+n++;
+d[n]='e';
+n++;
+d[n]='t';
+n++;
+d[n]='x';
+n++;
+d[n]='\0';
+printf("\n \n after character stuff the frame is :\n");
+puts(d);
+}
