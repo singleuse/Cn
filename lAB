@@ -1,3 +1,5 @@
+//1. Implement the data link layer framing methods such as character, character-stuffing and bit stuffing.
+//a.bit stuffing
 #include<stdio.h>
 #include<string.h>
 void main()
@@ -41,7 +43,7 @@ puts(b);
 }
 
 
-  //b
+  //b character-stuffing
   #include<stdio.h>
 #include<string.h>
 void main(){
