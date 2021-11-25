@@ -319,3 +319,449 @@ int uni(int i,int j)
 	}
 	return 0;
 }
+
+
+//wt
+//Write a PHP script to print prime numbers between 1-50.
+<?php  
+$count = 0;  
+$num = 2;  
+while ($count < 15 )  
+{  
+$div_count=0;  
+for ( $i=1; $i<=$num; $i++)  
+{  
+if (($num%$i)==0)  
+{  
+$div_count++;  
+}  
+}  
+if ($div_count<3)  
+{  
+echo $num." , ";  
+$count=$count+1;  
+}  
+$num=$num+1;  
+}  
+?>  
+
+//PHP script to
+//a. Find the length of a string.
+<!DOCTYPE html>
+<html>
+<body>
+<?php
+echo strlen("Hello");
+?>
+</body>
+</html>
+
+
+//Count no of words in a string.
+<!DOCTYPE html>
+<html>
+<body>
+<?php
+echo str_word_count("Hello world!");
+?>
+</body>
+</html>
+
+
+//Reverse a string.
+<html>
+<body>
+<?php
+echo strrev("Hello World!");
+?>
+</body>
+</html>
+
+
+//Search for a specific string.
+<!DOCTYPE html>
+<html>
+<body>
+<?php
+echo strpos("I love php, I love php too!","php");
+?>
+</body>
+</html>
+
+
+//Write a PHP script to merge two arrays and sort them as numbers, in descending order.
+<?php
+    $a1=array(1,3,15,7,5);
+    $a2=array(4,3,20,1,6);
+    $num=array_merge($a1,$a2);
+    array_multisort($num,SORT_DESC,SORT_NUMERIC);
+    print_r($num);
+?>
+
+
+//Write a PHP script that reads data from one file and write into another file.
+<!DOCTYPE html>
+<html>
+<body>
+<?php
+$myfile = fopen("wp.txt", "r") or die("Unable to open file!");
+echo fread($myfile,filesize("wp.txt"));
+fclose($myfile);
+?>
+</body>
+</html>
+
+
+//Create and save an XML document on the server, which contains 10 users information. Writea program, which takes User Id as an input and returns the user details by taking the userinformation from the XML document.
+<employees>
+<employee id="111">
+<firstName>Raja</firstName>
+<lastName>Reddy</lastName>
+<location>India</location>
+</employee>
+<employee id="222">
+<firstName>Kumar</firstName>
+<lastName>Gussin</lastName>
+<location>Russia</location>
+</employee>
+<employee id="333">
+<firstName>David</firstName>
+<lastName>Feezor</lastName>
+<location>USA</location>
+</employee>
+
+<employee id="444">
+<firstName>Lokesh</firstName>
+<lastName>Gupta</lastName>
+<location>India</location>
+</employee>
+<employee id="555">
+<firstName>Vishnu</firstName>
+<lastName>Gussin</lastName>
+<location>Russia</location>
+</employee>
+<employee id="666">
+<firstName>Veeru</firstName>
+<lastName>Feezor</lastName>
+<location>USA</location>
+</employee>
+<employee id="777">
+<firstName>Pavan</firstName>
+<lastName>Feezor</lastName>
+<location>USA</location>
+
+</employee>
+<employee id="888">
+<firstName>Narayana</firstName>
+<lastName>Gussin</lastName>
+<location>Russia</location>
+</employee>
+<employee id="999">
+<firstName>David</firstName>
+<lastName>Feezor</lastName>
+<location>USA</location>
+</employee>
+<employee id="1000">
+<firstName>Sunder</firstName>
+<lastName>Feezor</lastName>
+<location>USA</location>
+</employee>
+</employees>
+
+//java
+import org.w3c.dom.*;
+import javax.xml.parsers.*;
+import java.io.*;
+import java.util.Scanner;
+public class ReadXML 
+{
+      public static void main(String a[]) throws Exception
+     {
+	DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+	DocumentBuilder builder = factory.newDocumentBuilder();
+	
+	//Build Document
+	Document document = builder.parse(new File("D:\\m\\employees.xml"));
+	
+	//Normalize the XML Structure; It's just too important !!
+	document.getDocumentElement().normalize();
+	
+	//Here comes the root node
+	Element root = document.getDocumentElement();
+
+	//Get all employees
+	NodeList nList = document.getElementsByTagName("employee");
+	System.out.println("enter employee id:");
+	Scanner s=new Scanner(System.in);		
+	String id=s.next();
+	for (int temp = 0; temp < nList.getLength(); temp++)
+	{
+		Node node = nList.item(temp);
+		if (node.getNodeType() == Node.ELEMENT_NODE)
+		{
+			Element eElement = (Element) node;
+			if(eElement.getAttribute("id").equals(id))
+			{
+				System.out.println("First Name : "  + eElement.getElementsByTagName("firstName").item(0).getTextContent());
+				System.out.println("Last Name : "   + eElement.getElementsByTagName("lastName").item(0).getTextContent());
+				System.out.println("Location : "    + eElement.getElementsByTagName("location").item(0).getTextContent());
+			}
+		}
+	}
+    }
+}
+
+//amazon
+Home page
+main.html:
+<html>
+<head>
+<title>Amazon</title>
+</head>
+<body bgcolor="cyan"><center>
+<strong><h1>Welcome to AMAZON</h1></strong>
+<form method="post" action="login.html" target=_blank >
+<h4>for books</h4>
+<input type="submit" value="click here">
+</form>
+</center>
+</body>
+</html>
+
+Registration and user Login
+Login.html:
+<html>
+<head>
+<title>
+login page</title>
+</head>
+<body bgcolor="cyan"><center>
+<strong><h1> AMAZON </h1></strong></center>
+<right>
+<table align="right">
+<tr>
+<td><h4>user name</td>
+<td><input type="text" ></td>
+<td></td>
+</tr>
+<tr>
+<td><h4>password</td>
+<td><input type="password"></td>
+<td></td>
+</tr>
+<tr>
+<td>
+<form method="post" action="catalog.html" >
+<input type="submit" value="submit" >
+</form>
+</td>
+<td>
+<form method="post" action="userpro.html" >
+<input type="submit" value="register" >
+&nbsp;&nbsp;
+<input type="reset" value="reset"></form></td>
+</tr></table></body></html>
+
+
+User profile page
+Userpro.html:
+<html>
+<head>
+<title>
+login page</title>
+</head>
+<body bgcolor="cyan">
+<center><strong><h1> AMAZON </h1></strong></center>
+<form method="post" action="catalog.html" >
+<right>
+<table align="left">
+<tr>
+<td><h4>user name</td>
+<td><input type="text" ></td>
+<tr>
+<tr>
+<td><h4>password</td>
+<td><input type="password"></td>
+</tr>
+<tr>
+<td><h4>confirm password</td>
+<td><input type="password"></td>
+</tr>
+<tr>
+<td><h4>male &nbsp;&nbsp;
+<option >
+<input type="radio" name="sex" id="male"></td>
+<td><h4>female &nbsp; &nbsp;
+<input type="radio" name="sex" id="female" ></td>
+</option>
+</tr>
+<tr>
+<td>Address</td>
+<td><textarea name="address" rows=5 cols=19>
+</textarea>
+</td>
+<tr>
+<td>
+<input type="submit" value="submit" ></td>
+<td>
+<input type="reset" value="reset"></td>
+</tr>
+</form>
+</body>
+</html>
+
+
+Books catalog
+Catalog.html:
+<html>
+<head>
+<title>
+books catalog</title>
+</head>
+<body bgcolor="cyan">
+<center><h1>AMAZON</h1></center>
+<form method="post" action="shopping.html">
+<left>
+<table>
+<tr>
+<td><b><h3>frontend books</td>
+<td></td></tr>
+<tr>
+<td></td>
+<td><h4>C&Ds</td>
+</tr>
+<tr>
+<td></td>
+<td><h4>Ads</td>
+
+Books catalog
+Catalog.html:
+<html>
+<head>
+<title>
+books catalog</title>
+</head>
+<body bgcolor="cyan">
+<center><h1>AMAZON</h1></center>
+<form method="post" action="shopping.html">
+<left>
+<table>
+<tr>
+<td><b><h3>frontend books</td>
+<td></td></tr>
+<tr>
+<td></td>
+<td><h4>C&Ds</td>
+</tr>
+<tr>
+<td></td>
+<td><h4>Ads</td>
+</tr>
+<tr>
+<td></td>
+<td><h4>JAVA
+</td></tr>
+<tr>
+<td><b><h3>backend books</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td><h4>Oracle</td>
+</tr>
+<tr>
+<td></td>
+<td><h4>Ms SQL Server
+</td></tr>
+<tr>
+<td></td>
+<td><h4>MySql </td>
+</tr>
+</table>
+</h4>
+<center>
+<b>for buy one of these books
+<br>
+</b><input type="submit" value="click here">
+</center>
+</form>
+</body>
+</html>
+
+Shopping cart
+Shopping.html:
+<html>
+<head><title>shopping cart</title>
+</head>
+<body bgcolor="cyan">
+<center><h1>
+Shopping Cart</h1></center>
+<br><br><br><br><br>
+<table align="center">
+<tr>
+<td>Text Books</td>
+<td>
+<select >
+<optgroup label="select the book">
+<option value="C&Ds">C&Ds
+<option value="Ads">Ads
+<option value="Java">Java
+<option value="Oracle">Oracle
+<option value="Ms SQL Server">Ms SQL Server
+<option value="MySql">MySql
+</optgroup>
+</select>
+</td></tr>
+<tr>
+<td>
+Quantity</td>
+<td>
+<input type="text" id="q">
+</td></tr>
+<tr>
+<td></td>
+<td>
+<form method=post action="payment.html">
+<input type="submit" value=ok />
+</form>
+</td></tr>
+</table>
+<center>
+<pre>Cost of one book is"500" + shipping "100"</pre>
+</center>
+<body></html>
+
+Payment by credit card
+Payment.html:
+<html>
+<head><title>payment</title></head>
+<body bgcolor="cyan">
+<center><h1>Payment By Credit Card</h1></center>
+<form method=post action="orderconform.html">
+<br><br><br><br><br>
+<table align="center">
+<tr><td>
+<h4>Total Amount</h4></td>
+<td><input type="text">
+</td></tr>
+<tr>
+<td><h4>Credit Card Number</td>
+<td><input type="text"></td>
+</tr><tr><td></td>
+<td><input type="submit" value=OK>
+</td></tr>
+</table>
+</form></body></html>
+
+Order Conformation
+Orderconform.html
+<html>
+<head><title>order conformation</title><M/head>
+<body bgcolor="cyan"><center>
+<h1><b>AMAZON</h1>
+<pre><strong>
+<b>Your order Is Conformed
+</strong></pre>
+<h2><b>THANK YOU</h2>
+</center></body></html>
+
