@@ -319,7 +319,153 @@ int uni(int i,int j)
 	}
 	return 0;
 }
+//7 encryption and decrytion
+#include<stdio.h>
+#include<string.h>
+#include<ctype.h>
+void main()
+{
+char plain[20];
+char alpha[26]="abcdefghijklmnopqrstuvwxyz";
+int num[20],i,n,key;
+printf("\nEnter the plain text:");
+scanf("%s",plain);
+n=strlen(plain);
+for(i=0;i<n;i++)
+num[i]=toascii(tolower(plain[i]))-'a';
+printf("\nEnter the key:");
+scanf("%d",&key);
+for(i=0;i<n;i++)
+num[i]=(num[i]+key)%26;
+for(i=0;i<n;i++)
+plain[i]=alpha[num[i]];
+printf("\nThe key is:%d",key);
+printf("\nEncrypted text is:%s",plain);
+for(i=0;i<n;i++)
+{
+num[i]=(num[i]-key)%26;
+if(num[i]<0)
+num[i]=26+num[i];
+plain[i]=alpha[num[i]];
+}
+printf("\nDecrypted text is:%s",plain);
+}
+//8 leaky bucket
+#include<stdio.h>
 
+#include<stdlib.h>
+
+#include<unistd.h>
+
+
+
+#define NOF_PACKETS 10
+
+
+
+int k_rand(int a)
+
+{
+
+    int rn = (random() % 10) % a;
+
+    return  rn == 0 ? 1 : rn;
+
+}
+
+
+
+int main()
+
+{
+
+    int packet_sz[NOF_PACKETS], i, clk, b_size, o_rate, p_sz_rm=0, p_sz, p_time, op;
+
+    for(i = 0; i<NOF_PACKETS; ++i)
+
+        packet_sz[i] = k_rand(6) * 10;
+
+    for(i = 0; i<NOF_PACKETS; ++i)
+
+        printf("\npacket[%d]:%d bytes\t", i, packet_sz[i]);
+
+    printf("\nEnter the Output rate:");
+
+    scanf("%d", &o_rate);
+
+    printf("Enter the Bucket Size:");
+
+    scanf("%d", &b_size);
+
+    for(i = 0; i<NOF_PACKETS; ++i)
+
+    {
+
+        if( (packet_sz[i] + p_sz_rm) > b_size)
+
+            if(packet_sz[i] > b_size)/compare the packet siz with bucket size/
+
+                printf("\n\nIncoming packet size (%dbytes) is Greater than bucket capacity (%dbytes)-PACKET REJECTED", packet_sz[i], b_size);
+
+            else
+
+                printf("\n\nBucket capacity exceeded-PACKETS REJECTED!!");
+
+        else
+
+        {
+
+            p_sz_rm += packet_sz[i];
+
+            printf("\n\nIncoming Packet size: %d", packet_sz[i]);
+
+            printf("\nBytes remaining to Transmit: %d", p_sz_rm);
+
+            p_time = k_rand(4) * 10;
+
+            printf("\nTime left for transmission: %d units", p_time);
+
+            for(clk = 10; clk <= p_time; clk += 10)
+
+            {
+
+                sleep(1);
+
+                if(p_sz_rm)
+
+                {
+
+                    if(p_sz_rm <= o_rate)/packet size remaining comparing with output rate/
+
+                        op = p_sz_rm, p_sz_rm = 0;
+
+                    else
+
+                        op = o_rate, p_sz_rm -= o_rate;
+
+                    printf("\nPacket of size %d Transmitted", op);
+
+                    printf("----Bytes Remaining to Transmit: %d", p_sz_rm);
+
+                }
+
+                else
+
+                {
+
+                    printf("\nTime left for transmission: %d units", p_time-clk);
+
+                    printf("\nNo packets to transmit!!");
+
+                }
+
+            }
+
+        }
+
+    }
+
+}
 
 //wt
 //Write a PHP script to print prime numbers between 1-50.
@@ -765,3 +911,457 @@ Orderconform.html
 <h2><b>THANK YOU</h2>
 </center></body></html>
 
+//Validate the Registration, user login, user profile and payment by credit card pages using JavaScript.
+
+1.Reg.html
+<html>
+<head>
+<script>
+function validateForm() {
+  var fname = document.forms["myForm"]["firstname"].value;
+ var lname = document.forms["myForm"]["lastname"].value;
+var email =document.forms["myForm"]["email"].value;
+var bday =document.forms["myForm"]["birthday"].value;
+var gender=document.forms["myForm"]["gender"].value;
+  if ((fname == "") ||(lname=="") || (email=="")||(bday=="")||(gender==""))
+{
+alert(" filled out the field ");
+    return false;
+  }
+else
+{
+alert("Thank you for your registration");
+}
+}
+</script>
+</head>
+<body>
+<form name="myForm" onsubmit="return validateForm()" method="post" action="index.html">
+<h4>REGISTRATION FORM</h4>
+<p><font color="red">* </font>Mandatory Fields</p>
+<table>
+<tr>
+<td>
+            First Name: *
+</td>
+<td>
+<input type="text" name="firstname" value=" " />
+</td>
+</tr>
+<tr>
+<td>
+            Last Name: *
+</td>
+<td>
+<input type="text" name="lastname" value=" " />
+</td>
+</tr>
+<tr>
+<td>
+            Email: *
+</td>
+<td>
+<input type="email" name="email" value=" " />
+</td>
+</tr>
+<tr>
+<td>
+            Date of Birth: *
+</td>
+<td>
+<input type="date" name="birthday" />
+</td>
+</tr>
+
+<tr>
+<td>
+            Your Website:
+</td>
+<td>
+<input type="url" name="homepage" value=" " />
+</td>
+</tr>
+<tr>
+<td>
+            Gender: *
+</td>
+<td>
+<select name="gender">
+<option value="male">Male</option>
+<option value="female">Female</option>
+</select>
+</td>
+</tr>
+<tr>
+<td>
+<input type="submit" name="reg" value="Register" />
+</td>
+</tr>
+</table>
+</form>
+</body>
+</html>
+
+2.Index.html
+<html
+<head>
+<script>
+function validateform(){  
+var name=document.myform.name.value;  
+var password=document.myform.password.value;  
+var password=document.myform.password.value; 
+if (name==null || name==""){
+alert("Name can't be blank");  
+  return false;  
+}else if(password.length<6){  
+alert("Password must be at least 6 characters long.");  
+  return false;  
+  }  
+else
+alert ("Welcome "+name);
+}  
+</script>
+</head>
+<body>
+<h3>Login Form</h3>
+<form name="myform" method="post"  onsubmit="return validateform()" action="ccv.html">
+Username: <input type="text" name="name"><br/>
+Password: <input type="password" name="password"><br/>
+<input type="submit" value="login">
+</form>
+</body>
+</html>
+
+
+
+3ccv.html
+<html>
+<head>
+<title>Credit Card Details</title>
+<link rel="stylesheet" href="style.css">
+<script>
+function validateform(){ 
+
+var cno=document.myform.cno.value;  
+var month=document.myform.Month.value;  
+  var year=document.myform.Year.value;  
+  var cvv=document.myform.cvv.value;  
+
+ if(cno.length<15)
+alert("Card number must be 16 digits");
+else if(cvv.length!=3)
+alert("CVV number must be 3 digits");
+}  
+</script>
+</head>
+<body>
+<form class="credit-card" name="myform" onsubmit=" return validateform()">
+<div class="form-header">
+<h4 class="title">Credit card detail</h4>
+</div>
+
+<div class="form-body">
+
+<input type="text" class="card-number" placeholder="Card Number"name="cno" required>
+
+
+<div class="date-field">
+<div class="month">
+<select name="Month" required>
+<option value="january">January</option>
+<option value="february">February</option>
+<option value="march">March</option>
+<option value="april">April</option>
+<option value="may">May</option>
+<option value="june">June</option>
+<option value="july">July</option>
+<option value="august">August</option>
+<option value="september">September</option>
+<option value="october">October</option>
+<option value="november">November</option>
+<option value="december">December</option>
+</select>
+</div>
+<div class="year">
+<select name="Year" required>
+<option value="2016">2016</option>
+<option value="2017">2017</option>
+<option value="2018">2018</option>
+<option value="2019">2019</option>
+<option value="2020">2020</option>
+<option value="2021">2021</option>
+<option value="2022">2022</option>
+<option value="2023">2023</option>
+<option value="2024">2024</option>
+</select>
+</div>
+</div>
+
+<div class="card-verification">
+<div class="cvv-input">
+<input type="text" placeholder="CVV" name="cvv" required>
+</div>
+<div class="cvv-details">
+<p>3 or 4 digits usually found <br> on the signature strip</p>
+</div>
+</div>
+
+<button type="submit" class="proceed-btn"> Proceed</button>
+
+</div>
+</form>
+</body>
+</html>
+
+//8. Installing Tomcat web server. Convert the static web page into dynamic web pages using servlets and cookies.
+This is a brief "how-to" for installing Tomcat on a Windows PC.
+Installing Java
+Tomcat requires java in order to run. If your computer already has java installed, you can probably skip this step. However, make sure you have a recent version of java. Here I provide instructions for installing version 1.4.2 of the Java 2 Platform, Standard Edition (J2SE).
+Steps for installing java
+1.	Go to the download page of J2SE Version 1.4.2.
+2.	Select the version for Windows and click through the license acceptance. After two pages, you will be able to download the EXE file for installing java on windows. Look for the SDK version.
+3.	Download and run the EXE installation program.
+4.	You will need to accept the license agreement again.
+5.	Use the suggested directory for installing java (C:\j2sdk1.4.2_01).
+6.	You may use the remaining default settings for the installation.
+Setting the Java Environment Variable
+Tomcat will need to know where you have installed java. To do this, you will need to set the environment variable JAVA_HOME to C:\j2sdk1.4.2_01 (where you installed java).
+Here are the steps for setting the environment variable on my computer (Windows XP Professional). The steps will probably be similar for other Windows computers.
+1.	Open the control panel under the start menu.
+2.	Double-click on System.
+3.	Click on the Advanced tab.
+4.	Click on the Environment Variables button.
+5.	Under System Variables, click on the New button.
+6.	For variable name, type: JAVA_HOME
+7.	For variable value, type: C:\j2sdk1.4.2_01
+8.	Continue to click OK to exit the dialog windows.
+Installing Tomcat
+After setting the JAVA_HOME environment variable, you can install tomcat.
+1.	Go to the Tomcat Web page.
+2.	Click on Binaries under the Download label on the left side of the page.
+3.	Scroll down until you see Tomcat 4.1.x. (x will be some number greater than 10).
+4.	Click on the link ending with exe (e.g. 4.1.27 exe).
+5.	Download and run the exe file.
+6.	I suggest you install Tomcat at c:\tomcat4
+7.	Use the default settings and provide a password that you will remember.
+8.	now assume that your tomcat are installed at c:\tomcat4
+Running Tomcat
+Here are the steps to see if Tomcat has been successfully installed
+1.	Start Tomcat by finding its start program in the Programs Menu (located in the Start menu). Look under Apache Tomcat 4.1 and select "Start Tomcat".
+2.	Open a Web browser and type in the following URL:
+o	http://localhost:8080/
+At this point, you should see the Tomcat home page, which is provided by the Tomcat Web server running on your computer. Note: if your computer has an internet name or an IP number, you may access your Tomcat server anywhere on the internet by substituting localhost with the full name or IP number.
+To shut down your server and remove the Console window, select "Stop Tomcat" in the same menu of where you selected "Stop Tomcat".
+. Set Your CLASSPATH
+Since servlets and JSP are not part of the Java 2 platform, standard edition, you have to identify the servlet classes to the compiler. The server already knows about the servlet classes, but the compiler (i.e., javac) you use for development probably doesn't. So, if you don't set your CLASSPATH, attempts to compile servlets, tag libraries, or other classes that use the servlet and JSP APIs will fail with error messages about unknown classes. Here are the standard Tomcat locations:
+Tomcat 4: c:\tomcat4\common\lib\servlet.jar
+in addition to the servlet JAR file, you also need to put your development directory in the CLASSPATH. Although this is not necessary for simple packageless servlets, once you gain experience you will almost certainly use packages. Compiling a file that is in a package and that uses another class in the same package requires the CLASSPATH to include the directory that is at the top of the package hierarchy. Finally, you should include "." (the current directory) in the CLASSPATH. Otherwise, you will only be able to compile packageless classes that are in the top-level development directory.
+Here are two representative methods of setting the CLASSPATH. They assume that your development directory is C:\Servlets+JSP. Replace install_dir with the actual base installation location of the server. Also, be sure to use the appropriate case for the filenames, and enclose your pathnames in double quotes if they contain spaces.
+•	Windows 98/Me. Use the autoexec.bat file.
+o	Tomcat 4
+	Sample code: (Note that this all goes on one line with no spaces--it is broken here only for readability.)
+set CLASSPATH=.; C: \Tomcat4\common\lib\servlet.jar
+	Sample file to download and modify: autoexec.bat
+Note that these examples represent only one approach for setting the CLASSPATH. Many Java integrated development environments have a global or project-specific setting that accomplishes the same result. But these settings are totally IDE-specific and won't be discussed here. Another alternative is to make a script whereby -classpath ... is automatically appended onto calls to javac.
+•	Windows NT/2000/XP. You could use the autoexec.bat file as above, but a more common approach is to use system settings. On WinXP, go to the Start menu and select Control Panel, then System, then the Advanced tab, then the Environment Variables button. On Win2K/WinNT, go to the Start menu and select Settings, then Control Panel, then System, then Environment. Either way, enter the CLASSPATH value from the previous bullet.
+Enable the Invoker Servlet
+The invoker servlet lets you run servlets without first making changes to your Web application's deployment descriptor (i.e., the WEB-INF/web.xml file). Instead, you just drop your servlet into WEB-INF/classes and use the URL http://host/servlet/ServletName (or http://host/webAppName/servlet/ServletName once you start using your own Web applications). The invoker servlet is extremely convenient when you are learning and even when you are doing your initial development. To enable the invoker servlet, uncomment the following servlet-mapping element in c:\tomcat4\conf\web.xml. Also, do not confuse this Apache Tomcat-specific web.xml file with the standard one that goes in the WEB-INF directory of each Web application. Finally, remember to make a backup copy of the original version of this file before you make the changes.
+    <servlet-mapping>
+        <servlet-name>invoker</servlet-name>
+        <url-pattern>/servlet/*</url-pattern>
+    </servlet-mapping>
+
+
+
+
+Cookie Program
+Hello.html
+<html>
+<body>
+<form action="HelloForm" method="GET">
+First Name: <input type="text" name="first_name">
+<br />
+Last Name: <input type="text" name="last_name" />
+<input type="submit" value="Submit" />
+</form>
+</body>
+</html>
+
+HelloForm.java
+
+// Import required java libraries
+import java.io.*;
+import javax.servlet.*;
+import javax.servlet.http.*;
+ 
+// Extend HttpServlet class
+public class HelloForm extends HttpServlet {
+ 
+  public void doGet(HttpServletRequest request,
+                    HttpServletResponse response)
+            throws ServletException, IOException
+  {
+      // Create cookies for first and last names.      
+      Cookie firstName = new Cookie("first_name",
+                      request.getParameter("first_name"));
+      Cookie lastName = new Cookie("last_name",
+                      request.getParameter("last_name"));
+
+      // Set expiry date after 24 Hrs for both the cookies.
+      firstName.setMaxAge(60*60*24); 
+      lastName.setMaxAge(60*60*24); 
+
+      // Add both the cookies in the response header.
+      response.addCookie( firstName );
+      response.addCookie( lastName );
+
+      // Set response content type
+      response.setContentType("text/html");
+ 
+      PrintWriter out = response.getWriter();
+      String title = "Setting Cookies Example";
+      String docType =
+      "<!doctype html public \"-//w3c//dtd html 4.0 " +
+      "transitional//en\">\n";
+      out.println(docType +
+                "<html>\n" +
+                "<head><title>" + title + "</title></head>\n" +
+                "<body bgcolor=\"#f0f0f0\">\n" +
+                "<h1 align=\"center\">" + title + "</h1>\n" +
+                "<ul>\n" +
+                "  <li><b>First Name</b>: "
+                + request.getParameter("first_name") + "\n" +
+                "  <li><b>Last Name</b>: "
+                + request.getParameter("last_name") + "\n" +
+                "</ul>\n" +
+                "</body></html>");
+  }
+}
+
+ReadCookies.java
+// Import required java libraries
+import java.io.*;
+import javax.servlet.*;
+import javax.servlet.http.*;
+ 
+// Extend HttpServlet class
+public class ReadCookies extends HttpServlet {
+ 
+  public void doGet(HttpServletRequest request,
+                    HttpServletResponse response)
+            throws ServletException, IOException
+  {
+      Cookie cookie = null;
+	  Cookie[] cookies = null;
+      // Get an array of Cookies associated with this domain
+      cookies = request.getCookies();
+      
+	  // Set response content type
+      response.setContentType("text/html");
+ 
+      PrintWriter out = response.getWriter();
+      String title = "Reading Cookies Example";
+      String docType =
+      "<!doctype html public \"-//w3c//dtd html 4.0 " +
+      "transitional//en\">\n";
+      out.println(docType +
+                "<html>\n" +
+                "<head><title>" + title + "</title></head>\n" +
+                "<body bgcolor=\"#f0f0f0\">\n" );
+      if( cookies != null ){
+         out.println("<h2> Found Cookies Name and Value</h2>");
+         for (int i = 0; i < cookies.length; i++){
+            cookie = cookies[i];
+            out.print("Name : " + cookie.getName( ) + ",  ");
+            out.print("Value: " + cookie.getValue( )+" <br/>");
+         }
+      }else{
+          out.println(
+            "<h2>No cookies founds</h2>");
+      }
+      out.println("</body>");
+      out.println("</html>");
+   }
+}
+DeleteCookies.java
+// Import required java libraries
+import java.io.*;
+import javax.servlet.*;
+import javax.servlet.http.*;
+ 
+// Extend HttpServlet class
+public class DeleteCookies extends HttpServlet {
+ 
+  public void doGet(HttpServletRequest request,
+                    HttpServletResponse response)
+            throws ServletException, IOException
+  {
+      Cookie cookie = null;
+	  Cookie[] cookies = null;
+      // Get an array of Cookies associated with this domain
+      cookies = request.getCookies();
+      
+	  // Set response content type
+      response.setContentType("text/html");
+ 
+      PrintWriter out = response.getWriter();
+      String title = "Delete Cookies Example";
+      String docType =
+      "<!doctype html public \"-//w3c//dtd html 4.0 " +
+      "transitional//en\">\n";
+      out.println(docType +
+                "<html>\n" +
+                "<head><title>" + title + "</title></head>\n" +
+                "<body bgcolor=\"#f0f0f0\">\n" );
+       if( cookies != null ){
+         out.println("<h2> Cookies Name and Value</h2>");
+         for (int i = 0; i < cookies.length; i++){
+            cookie = cookies[i];
+            if((cookie.getName( )).compareTo("first_name") == 0 ){
+                 cookie.setMaxAge(0);
+                 response.addCookie(cookie);
+                 out.print("Deleted cookie : " + 
+                              cookie.getName( ) + "<br/>");
+            }
+            out.print("Name : " + cookie.getName( ) + ",  ");
+            out.print("Value: " + cookie.getValue( )+" <br/>");
+         }
+      }else{
+          out.println(
+            "<h2>No cookies founds</h2>");
+      }
+      out.println("</body>");
+      out.println("</html>");
+   }
+}
+
+Web.xml
+<web-app>
+<servlet>
+        <servlet-name>HelloForm</servlet-name>
+        <servlet-class>HelloForm</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>HelloForm</servlet-name>
+        <url-pattern>/HelloForm</url-pattern>
+    </servlet-mapping>
+<servlet>
+        <servlet-name>ReadCookies</servlet-name>
+        <servlet-class>ReadCookies</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>ReadCookies</servlet-name>
+        <url-pattern>/ReadCookies</url-pattern>
+    </servlet-mapping>
+<servlet>
+        <servlet-name>DeleteCookies</servlet-name>
+        <servlet-class>DeleteCookies</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>DeleteCookies</servlet-name>
+        <url-pattern>/DeleteCookies</url-pattern>
+    </servlet-mapping>
+</web-app>
