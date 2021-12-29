@@ -1,51 +1,49 @@
 //1. Implement the data link layer framing methods such as character, character-stuffing and bit stuffing.
 //a.bit stuffing
 #include<stdio.h>
+
 #include<string.h>
-voidmain() 
-{ 
-intn,i,j,k,count; 
-chara[50],b[50]; 
-printf("enter input frame(0's&1's):\n"); 
-gets(a); 
-n=strlen(a); 
-strcpy(b,"01111110"); 
-i=0;
-j=8; 
+
+void main()
+
+{
+char a[50],b[50];
+int i=0,j=8,k,count,n;
+printf("Enter Input fram (0's & 1's only):\n");
+gets(a);
+n=strlen(a);
+strcpy(b,"01111110");
 while(i<n)
 {
 count=1;
-if(a[i]=='1') 
-{ 
-b[j]=a[i]; 
-for(k=i+1;a[k]=='1'&&k<n&&count<5; k++)
-{
-j++; 
-b[j]=a[k]; 
-count++; 
-if(count==5) 
-{ 
-j++; 
-b[j]='0'; 
-} 
-i=k;
-} 
-} 
-else 
+if(a[i]='1')
 {
 b[j]=a[i];
-} i++;
-j++; 
-} 
-b[j]='\0';
-strcat(b,"01111110"); 
-printf("after stuffing the frame is:\n"); 
-puts(b);
+for(k=i+1;a[k]=='1' && k<n && count<5;k++)
+{
+j++;
+b[j]=a[k];
+count++;
+if(count==5)
+{
+j++;
+b[j]='/0';
 }
-
-
-
-  //b character-stuffing
+i=k;
+}
+}
+else
+{
+b[j]=a[i];
+}
+i++;
+j++;
+}
+b[j]='\0';
+strcat(b,"01111110");
+printf("After stuffing the frame is:\n");
+puts(b);
+}  //b character-stuffing
   #include<stdio.h>
 #include<string.h>
 void main(){
