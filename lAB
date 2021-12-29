@@ -39,7 +39,7 @@ b[j]=a[i];
 i++;
 j++;
 }
-b[j]='\0';
+b[j]='0';
 strcat(b,"01111110");
 printf("After stuffing the frame is:\n");
 puts(b);
